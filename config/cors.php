@@ -11,7 +11,7 @@ return [
      |
      */
     'supportsCredentials' => false,
-    'allowedOrigins'      => env('CORS_ALLOWED_ORIGINS', ['*']),
+    'allowedOrigins'      => [env('CORS_ALLOWED_ORIGINS', '*')],
     'allowedHeaders'      => ['*'],
     'allowedMethods'      => ['*'],
     'exposedHeaders'      => [],
