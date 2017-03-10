@@ -12,6 +12,7 @@ class SignupController extends BaseController
         $player = new Player();
         $player->uuid = Uuid::uuid4();
         $player->api_token = str_random(32);
+        $player->ip_address = $request->getClientIp();
         $player->save();
 
         auth()->login($player);
