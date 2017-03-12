@@ -27,6 +27,7 @@ class DropController extends BaseController
                 'map'         => $drop->map->name,
                 'lap'         => $drop->lap,
                 'drop'        => $drop->quantity,
+                'rate'        => $drop->rate,
                 'updated_at'  => $drop->updated_at->format(Carbon::ATOM),
             ];
         });

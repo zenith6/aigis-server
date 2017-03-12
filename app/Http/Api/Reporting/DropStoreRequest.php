@@ -16,6 +16,7 @@ class DropStoreRequest extends BaseFormRequest
             'map.*.id'       => ['required', 'exists:maps,id'],
             'map.*.lap'      => ['required', 'integer', 'min:0'],
             'map.*.quantity' => ['required', 'integer', 'min:0'],
+            'drop_rate'      => ['numeric', 'min:0'],
         ];
     }
 }

@@ -21,10 +21,15 @@ class MapController extends BaseController
                 \DB::raw('SUM(quantity) / SUM(lap) AS quantity_average'),
             ]);
 
+        if ($rate = $request->input('filter.drop_rate')) {
+            $drops->where('rate', $rate);
+        }
+
         $maps = Map::query()
             ->leftJoin(\DB::raw('(' . $drops->toSql() . ') AS drops'), function (JoinClause $clause) {
                 $clause->on('maps.id', 'drops.map_id');
             })
+            ->addBinding($drops->getBindings(), 'join')
             ->select([
                 'maps.id' => 'id',
                 \DB::raw('IFNULL(drops.samples, 0) AS samples'),
@@ -34,13 +39,19 @@ class MapController extends BaseController
             ])
             ->get()
             ->map(function (Map $map) {
-                $map->drop_average = $map->drop_average + 0;
+                $map->samples = 0 + $map->samples;
+                $map->lap_sum = 0 + $map->lap_sum;
+                $map->drop_sum = 0 + $map->drop_sum;
+                $map->drop_average = 0 + $map->drop_average;
+                $map->quantity_sum = 0 + $map->quantity_sum;
+                $map->quantity_average = 0 + $map->quantity_average;
 
                 return $map;
             });
 
         return response()->json([
-            'maps' => $maps,
+            'maps'      => $maps,
+            'drop_rate' => $rate,
         ]);
     }
 }
