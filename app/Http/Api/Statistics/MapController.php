@@ -19,6 +19,7 @@ class MapController extends BaseController
                 \DB::raw('SUM(lap) AS lap_sum'),
                 \DB::raw('SUM(quantity) AS quantity_sum'),
                 \DB::raw('SUM(quantity) / SUM(lap) AS quantity_average'),
+                \DB::raw('MIN(rate) AS rate'),
             ]);
 
         if ($rate = $request->input('filter.drop_rate')) {
@@ -45,13 +46,13 @@ class MapController extends BaseController
                 $map->drop_average = 0 + $map->drop_average;
                 $map->quantity_sum = 0 + $map->quantity_sum;
                 $map->quantity_average = 0 + $map->quantity_average;
+                $map->rate = 0 + $map->rate;
 
                 return $map;
             });
 
         return response()->json([
             'maps'      => $maps,
-            'drop_rate' => $rate,
         ]);
     }
 }

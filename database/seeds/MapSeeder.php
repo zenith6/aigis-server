@@ -1,10 +1,13 @@
 <?php
 
+use Aigis\Database\ForeignKeyControllable;
 use Aigis\Game\Map;
 use Illuminate\Database\Seeder;
 
 class MapSeeder extends Seeder
 {
+    use ForeignKeyControllable;
+
     /**
      * Run the database seeds.
      *
@@ -12,6 +15,8 @@ class MapSeeder extends Seeder
      */
     public function run()
     {
+        $this->disableForeignKeyCheck();
+
         Eloquent::unguard();
         DB::beginTransaction();
 
@@ -30,5 +35,7 @@ class MapSeeder extends Seeder
 
         DB::commit();
         Eloquent::reguard();
+
+        $this->enableForeignKeyCheck();
     }
 }
