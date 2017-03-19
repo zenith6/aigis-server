@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer lap
  * @property integer quantity
  * @property float rate
+ * @property bool verified
  * @property \Carbon\Carbon created_at
  * @property \Carbon\Carbon updated_at
  * @property \Aigis\Game\Map map
@@ -28,6 +29,7 @@ class Drop extends Model
         'lap'      => 'int',
         'quantity' => 'int',
         'rate'     => 'float',
+        'verified' => 'bool',
     ];
 
     public function map()

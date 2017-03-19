@@ -20,7 +20,8 @@ class MapController extends BaseController
                 \DB::raw('SUM(quantity) AS quantity_sum'),
                 \DB::raw('SUM(quantity) / SUM(lap) AS quantity_average'),
                 \DB::raw('MIN(rate) AS rate'),
-            ]);
+            ])
+            ->where('verified', 1);
 
         if ($rate = $request->input('filter.drop_rate')) {
             $drops->where('rate', $rate);

@@ -3,6 +3,7 @@
 namespace Aigis\Http\Api\Reporting;
 
 use Aigis\Game\Drop;
+use Aigis\Game\Map;
 use Aigis\Http\BaseController;
 use Illuminate\Support\Collection;
 
@@ -32,9 +33,16 @@ class DropController extends BaseController
             ->get()
             ->keyBy('map_id');
 
+        /** @var \Aigis\Game\Map[]|\Illuminate\Database\Eloquent\Collection $maps */
+        $maps = Map::query()->get()->keyBy('id');
+
         (new Collection($data))
-            ->map(function ($data) use ($player, $drops) {
+            ->map(function ($data) use ($player, $drops, $maps) {
+                /** @var \Aigis\Game\Drop $drop */
                 $drop = $drops->get($data['id']);
+
+                /** @var \Aigis\Game\Map $map */
+                $map = $maps->get($data['id']);
 
                 if (!$drop) {
                     $drop = new Drop();
@@ -44,9 +52,8 @@ class DropController extends BaseController
 
                 $drop->fill($data);
 
-                if ($drop->lap > 0) {
-                    $drop->save();
-                }
+                $drop->verified = (int)($drop->lap > 0 && $drop->quantity / $drop->lap <= $map->max_drops);
+                $drop->save();
             });
 
         \DB::commit();
