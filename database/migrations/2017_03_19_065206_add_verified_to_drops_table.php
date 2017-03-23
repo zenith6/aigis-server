@@ -24,7 +24,7 @@ class AddVerifiedToDropsTable extends Migration
                 drops
                 JOIN maps ON maps.id = drops.map_id
             SET
-                drops.verified = drops.quantity / drops.lap <= maps.max_drops
+                drops.verified = drops.quantity / IF(drops.lap > 0, drops.lap, 1) <= maps.max_drops
         ');
     }
 
