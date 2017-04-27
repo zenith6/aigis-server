@@ -10,6 +10,7 @@ $router->group(['middleware' => ['api'], 'prefix' => 'api'], function (Router $r
         $router->resource('account/signup', \Aigis\Http\Api\Account\SignupController::class, ['only' => ['store']]);
     });
 
-    $router->resource('missions.drops', \Aigis\Http\Api\Mission\DropController::class, ['only' => ['index', 'store', 'destroy']]);
+    $router->resource('missions.drops', \Aigis\Http\Api\Mission\DropController::class, ['only' => ['index', 'store']]);
+    $router->resource('missions.drops_clear', \Aigis\Http\Api\Mission\DropClearController::class, ['only' => ['store']]);
     $router->resource('missions.drops_stats', \Aigis\Http\Api\Mission\DropStatController::class, ['only' => ['index']]);
 });

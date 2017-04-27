@@ -10,7 +10,7 @@ return [
      | to accept any value.
      |
      */
-    'supportsCredentials' => false,
+    'supportsCredentials' => true,
     'allowedOrigins'      => [env('CORS_ALLOWED_ORIGINS', '*')],
     'allowedHeaders'      => ['*'],
     'allowedMethods'      => ['*'],

@@ -6,6 +6,7 @@ use Aigis\Game\Drop;
 use Aigis\Game\Mission;
 use Aigis\Http\BaseController;
 use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 
 class DropController extends BaseController
@@ -96,20 +97,6 @@ class DropController extends BaseController
                 $drop->verified = (int)($drop->lap > 0 && $drop->quantity / $drop->lap <= $map->max_drops);
                 $drop->save();
             });
-
-        \DB::commit();
-
-        return response()->json(['success' => true]);
-    }
-
-    public function delete(DropDeleteRequest $request)
-    {
-        \DB::beginTransaction();
-
-        /** @var \Aigis\Account\Player $player */
-        $player = $request->user();
-
-        $player->drops()->delete();
 
         \DB::commit();
 

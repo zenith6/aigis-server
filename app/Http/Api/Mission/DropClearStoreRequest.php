@@ -3,7 +3,7 @@ namespace Aigis\Http\Api\Mission;
 
 use Aigis\Http\BaseFormRequest;
 
-class DropDeleteRequest extends BaseFormRequest
+class DropClearStoreRequest extends BaseFormRequest
 {
     public function authorize()
     {
