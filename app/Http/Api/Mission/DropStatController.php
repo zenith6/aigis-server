@@ -18,9 +18,9 @@ class DropStatController extends BaseController
             ->select([
                 \DB::raw('map_id AS id'),
                 \DB::raw('COUNT(*) AS samples'),
-                \DB::raw('IFNULL(SUM(lap - IF(drops.contains_initial_bonus, 1, 0)), 0) AS lap_sum'),
-                \DB::raw('IFNULL(SUM(quantity - IF(drops.contains_initial_bonus, maps.max_drops, 0)), 0) AS drop_sum'),
-                \DB::raw('IFNULL(SUM(quantity - IF(drops.contains_initial_bonus, maps.max_drops, 0)) / SUM(lap - IF(drops.contains_initial_bonus, 1, 0)), 0) AS drop_average'),
+                \DB::raw('IFNULL(SUM(lap - IF(drops.contains_initial_bonus AND lap > 0, 1, 0)), 0) AS lap_sum'),
+                \DB::raw('IFNULL(SUM(quantity - IF(drops.contains_initial_bonus AND quantity >= maps.max_drops, maps.max_drops, 0)), 0) AS drop_sum'),
+                \DB::raw('IFNULL(SUM(quantity - IF(drops.contains_initial_bonus AND quantity >= maps.max_drops, maps.max_drops, 0)) / SUM(lap - IF(drops.contains_initial_bonus AND lap > 0, 1, 0)), 0) AS drop_average'),
                 \DB::raw('IFNULL(MIN(rate), 0) AS rate'),
             ])
             ->where('maps.mission_id', $mission->id)
