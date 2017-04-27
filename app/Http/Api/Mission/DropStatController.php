@@ -11,7 +11,7 @@ class DropStatController extends BaseController
 {
     public function index(DropStatIndexRequest $request, Mission $mission)
     {
-        $rate = $request->input('filter.drop_rate');
+        $rate = $request->input('drop_rate');
 
         $stats = Drop::query()
             ->join('maps', 'maps.id', '=', 'drops.map_id')
