@@ -1,4 +1,5 @@
 <?php
+
 namespace Aigis\Game;
 
 use Aigis\Account\Player;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer quantity
  * @property float rate
  * @property bool verified
+ * @property bool contains_initial_bonus
  * @property \Carbon\Carbon created_at
  * @property \Carbon\Carbon updated_at
  * @property \Aigis\Game\Map map
@@ -23,13 +25,15 @@ class Drop extends Model
         'lap',
         'quantity',
         'rate',
+        'contains_initial_bonus',
     ];
 
     protected $casts = [
-        'lap'      => 'int',
-        'quantity' => 'int',
-        'rate'     => 'float',
-        'verified' => 'bool',
+        'lap'                    => 'int',
+        'quantity'               => 'int',
+        'rate'                   => 'float',
+        'verified'               => 'bool',
+        'contains_initial_bonus' => 'bool',
     ];
 
     public function map()

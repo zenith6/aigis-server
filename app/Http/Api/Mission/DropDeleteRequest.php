@@ -1,13 +1,13 @@
 <?php
-namespace Aigis\Http\Api\Statistics;
+namespace Aigis\Http\Api\Mission;
 
 use Aigis\Http\BaseFormRequest;
 
-class MapIndexRequest extends BaseFormRequest
+class DropDeleteRequest extends BaseFormRequest
 {
     public function authorize()
     {
-        return true;
+        return $this->user();
     }
 
     public function rules()

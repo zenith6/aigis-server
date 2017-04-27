@@ -1,5 +1,5 @@
 <?php
-namespace Aigis\Http\Api\Drop;
+namespace Aigis\Http\Api\Mission;
 
 use Aigis\Http\BaseFormRequest;
 

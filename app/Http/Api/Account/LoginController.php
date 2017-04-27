@@ -1,4 +1,5 @@
 <?php
+
 namespace Aigis\Http\Api\Account;
 
 use Aigis\Account\Player;
@@ -8,8 +9,6 @@ class LoginController extends BaseController
 {
     public function store(LoginStoreRequest $request)
     {
-        return app()->abort(503);
-
         /** @var \Aigis\Account\Player $player */
         $player = Player::query()->where('api_token', $request->input('name'))->first();
 

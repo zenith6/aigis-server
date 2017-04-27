@@ -7,20 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property integer id
  * @property string name
- * @property integer max_drops
  * @property integer weight
+ * @property boolean allow_report
  * @property \Carbon\Carbon created_at
  * @property \Carbon\Carbon updated_at
  */
-class Map extends Model
+class Mission extends Model
 {
-    public function drops()
+    public function maps()
     {
-        return $this->hasMany(Drop::class);
+        return $this->hasMany(Map::class);
     }
 
-    public function mission()
+    public function drops()
     {
-        return $this->belongsTo(Mission::class);
+        return $this->hasManyThrough(Drop::class, Map::class);
     }
 }

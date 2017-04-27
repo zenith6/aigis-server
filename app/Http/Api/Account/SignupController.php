@@ -1,4 +1,5 @@
 <?php
+
 namespace Aigis\Http\Api\Account;
 
 use Aigis\Account\Player;
@@ -9,8 +10,6 @@ class SignupController extends BaseController
 {
     public function store(SignupStoreRequest $request)
     {
-        return app()->abort(503);
-
         $player = new Player();
         $player->uuid = Uuid::uuid4();
         $player->api_token = str_random(32);
